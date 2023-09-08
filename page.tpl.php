@@ -1,18 +1,34 @@
 
+
     <?php
-        $file = "books/{$book}/chapters/chapter-{$chapter}/title.html";
+        $toc = "books/{$book}/toc.php";
+        $path = $contentPath . "/$toc";
+        @require $path;
+        $chapterTitle = $toc[$chapter]["label"] . " - " . $toc[$chapter]["title"];
+    ?>
+
+    <?php
+        $file = "books/{$book}/title.html";
         $path = $contentPath . "/$file";
-        @include $path;
+        require $path;
     ?>
     
 
+
+
+    <?php
+        print "<h2>$chapterTitle</h2>";
+    ?>
+    
     <?php
         $file = "books/{$book}/chapters/chapter-{$chapter}/authors.html";
         $path = $contentPath . "/$file";
         @include $path;
     ?>
 
-    
+    <?php
+        include ($contentPath ."/books/tools.html");
+    ?>
 
     <?php 
         $file = "books/{$book}/chapters/chapter-{$chapter}/content";
